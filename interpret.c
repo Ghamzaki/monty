@@ -1,4 +1,7 @@
+#define _POSIX_C_SOURCE 200809L
+
 #include "monty.h"
+#include <stdio.h>
 
 /**
  * interpret - Interpret Monty bytecode from a file
@@ -10,13 +13,13 @@ void interpret(FILE *file)
 	size_t len = 0;
 	ssize_t read;
 	unsigned int line_number = 0;
+	char *opcode, *value_str;
+	int value;
 	stack_t *stack = NULL;
 
 	while ((read = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
-		char *opcode, *value_str;
-		int value;
 
 		opcode = strtok(line, " \t\n");
 		if (!opcode || opcode[0] == '#')
