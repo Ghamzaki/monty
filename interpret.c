@@ -30,37 +30,11 @@ void interpret(FILE *file)
  */
 void process_instruction(char *line, stack_t **stack, unsigned int line_number)
 {
-	char *opcode, *value_str;
-	int value;
-
+	char *opcode;
 
 	opcode = strtok(line, " \t\n");
 	if (!opcode || opcode[0] == '#')
 		return;
 
-	if (strcmp(opcode, "push") == 0)
-	{
-		value_str = strtok(NULL, " \t\n");
-		if (!value_str)
-		{
-			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-
-		value = atoi(value_str);
-		push(stack, value);
-	}
-	else if (strcmp(opcode, "pall") == 0)
-	{
-		pall(stack, line_number);
-	}
-	else if (strcmp(opcode, "pint") == 0)
-	{
-		pint(stack, line_number);
-	}
-	else
-	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-		exit(EXIT_FAILURE);
-	}
+	handle_opcode(opcode, stack, line_number);
 }
