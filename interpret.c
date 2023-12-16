@@ -1,7 +1,5 @@
 #define _POSIX_C_SOURCE 200809L
-
 #include "monty.h"
-#include <stdio.h>
 
 /**
  * interpret - Interpret Monty bytecode from a file
@@ -50,7 +48,7 @@ void process_instruction(char *line, stack_t **stack, unsigned int line_number)
 		}
 
 		value = atoi(value_str);
-		push(stack, value, line_number);
+		push(stack, value);
 	}
 	else if (strcmp(opcode, "pall") == 0)
 	{
