@@ -39,6 +39,10 @@ void handle_opcode(char *opcode, stack_t **stack, unsigned int l_no)
 	{
 		swap(stack, l_no);
 	}
+	else if (strcmp(opcode, "add") == 0)
+	{
+		add(stack, l_no);
+	}
 	else
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", l_no, opcode);
